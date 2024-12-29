@@ -1,27 +1,30 @@
 import { Component } from '@angular/core';
-import { routes } from '../../../app.routes';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+
+interface MenuItem {
+  path: string;
+  title: string;
+}
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterOutlet, RouterLink],
+  imports: [RouterModule, RouterLinkActive, CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+  public headerItems: MenuItem[] = [
+    { path: '/home', title: 'Inicio' },
+    { path: '/about', title: 'Nosotros' },
+    { path: '/contact', title: 'Contacto' },
+    { path: '/calculator', title: 'Calculadora' }
+  ];
 
-  public headerItems = routes
-    .map((route) => route.children ?? [])
-    .flat()
-    .filter((route) => route && route.path)
-    .filter((route) => !route.path?.includes(':'));
+  public isMobileMenuOpen = false;
 
-  // Variable para controlar el menú móvil
-  public isMenuOpen = false;
-
-  // Método para alternar el menú
-  toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
 }

@@ -1,0 +1,77 @@
+/* General reset */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+  }
+  
+  /* Footer styling */
+  .footer {
+    background-color: #1d4ed8; /* Blue background */
+    color: white;
+    padding: 2rem 1rem;
+  }
+  
+  .footer .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .footer-section {
+    flex: 1 1 30%;
+    margin-bottom: 1rem;
+  }
+  
+  .footer-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  .footer-description {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  
+  .footer-heading {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .footer-links,
+  .footer-social {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer-links li,
+  .footer-social li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .footer-links a,
+  .footer-social a {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-links a:hover,
+  .footer-social a:hover {
+    color: #93c5fd; /* Light blue */
+  }
+  
+  /* Footer bottom styling */
+  .footer-bottom {
+    text-align: center;
+    padding: 1rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  

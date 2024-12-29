@@ -1,1 +1,218 @@
-<h1>Hola soy el inicio</h1>
+<div class="container mx-auto px-4 py-8">
+    <div class="container mx-auto px-4 py-8">
+      <div class="flex flex-col items-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold leading-tight text-center mb-8">
+          Somos expertos<br />en tecnología 3D
+        </h1>
+        <div class="relative w-full max-w-3xl h-64 md:h-96">
+          <!-- Left arrow -->
+          <div (click)="previousImage()"
+            class="absolute left-0 top-0 bottom-0 w-1/4 flex items-center justify-start p-4 cursor-pointer z-10">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+          </div>
+  
+          <!-- Images -->
+          <div *ngFor="let image of images; let i = index"
+            class="absolute top-0 left-0 w-full h-full transition-opacity duration-500 ease-in-out" [ngClass]="{
+              'opacity-100': i === currentIndex,
+              'opacity-0': i !== currentIndex
+            }">
+            <img [src]="image.src" [alt]="image.alt" class="w-full h-full object-cover rounded-lg" />
+          </div>
+  
+          <!-- Right arrow -->
+          <div (click)="nextImage()"
+            class="absolute right-0 top-0 bottom-0 w-1/4 flex items-center justify-end p-4 cursor-pointer z-10">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
+  
+          <!-- Navigation dots -->
+          <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
+            <button *ngFor="let image of images; let i = index" (click)="setCurrentIndex(i)"
+              class="w-3 h-3 rounded-full transition-all duration-300 ease-in-out" [ngClass]="{
+                'bg-blue-600': i === currentIndex,
+                'bg-gray-300': i !== currentIndex
+              }"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Section Heading -->
+    <h2 class="text-3xl font-bold text-center mb-8">
+      Servicio de impresión en 3D y Escaneo 3D
+    </h2>
+  
+    <!-- Cards Section -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Industrial Card -->
+      <div routerLink="/admin/soluciones"
+        class="bg-gray-900 p-6 rounded-lg text-white hover:bg-gray-800 transition-colors duration-300 shadow-lg hover:shadow-2xl transform hover:scale-105">
+        <div class="text-blue-500 mb-4">
+          <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
+            </path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+            </path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold mb-2">Industrial</h3>
+        <p class="text-sm">
+          Con nuestra tecnología 3D de última generación, ayudamos a la industria
+          a reducir costos en la fabricación de moldes y piezas de repuesto, al
+          mismo tiempo que producimos componentes personalizados en tiempos
+          récord. Descubre cómo podemos optimizar tus procesos y llevar tu
+          producción al siguiente nivel.
+        </p>
+      </div>
+  
+      <!-- Empresarial Card -->
+      <div routerLink="/admin/soluciones"
+        class="bg-gray-900 p-6 rounded-lg text-white hover:bg-gray-800 transition-colors duration-300 shadow-lg hover:shadow-2xl transform hover:scale-105">
+        <div class="text-red-500 mb-4">
+          <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold mb-2">Empresarial</h3>
+        <p class="text-sm">
+          Transformamos ideas en realidad: diseñamos y producimos piezas y
+          componentes a medida para múltiples aplicaciones empresariales. Con
+          nuestra tecnología avanzada, facilitamos el desarrollo de prototipos con
+          una precisión impecable y tiempos de entrega asombrosamente rápidos.
+          Impulsa la innovación de tu empresa y mantente un paso adelante en la
+          industria.
+        </p>
+      </div>
+  
+      <!-- Academia Card -->
+      <div routerLink="/admin/soluciones"
+        class="bg-gray-900 p-6 rounded-lg text-white hover:bg-gray-800 transition-colors duration-300 shadow-lg hover:shadow-2xl transform hover:scale-105">
+        <div class="text-green-500 mb-4">
+          <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9">
+            </path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold mb-2">Academicos</h3>
+        <p class="text-sm">
+          Nuestra tecnología 3D permite a la academia ofrecer un amplio abanico de
+          actividades y proyectos educativos 3D de alto valor agregado.
+        </p>
+      </div>
+  
+      <!-- Hogares Card -->
+      <div routerLink="/admin/soluciones"
+        class="bg-gray-900 p-6 rounded-lg text-white hover:bg-gray-800 transition-colors duration-300 shadow-lg hover:shadow-2xl transform hover:scale-105 right-4">
+        <div class="text-yellow-500 mb-4">
+          <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+            </path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold mb-2">Hogares</h3>
+        <p class="text-sm">
+          Ayudamos a hacer realidad las ideas y facilitamos la materialización de
+          los diseños de nuestros usuarios.
+        </p>
+      </div>
+    </div>
+  
+    <div class="font-sans mt-4 rounded-none overflow-hidden">
+      <div class="bg-gray-900 text-white relative rounded-2xl">
+        <div class="container mx-auto px-4 py-16 relative z-10">
+          <div class="max-w-3xl">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">
+              La impresión 3D está
+              <span class="text-green-400">revolucionando</span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-8">
+              El mundo
+            </p>
+            <button routerLink="/admin/soluciones"
+              class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+              Descubre más
+            </button>
+          </div>
+        </div>
+        <div class="absolute right-0 top-0 w-1/2 h-full">
+          <img
+            src="https://cdn.prod.website-files.com/657b24018d72422f5109a72e/669e19ab7f668ee05948fc1b_innovacion-dise%C3%B1o-3d-ciudad.webp"
+            alt="3D Printed Figure" class="object-cover object-left h-full w-full opacity-50 rounded-2xl" />
+        </div>
+      </div>
+  
+      <div class="bg-white py-16 rounded-b-2xl shadow-lg">
+        <div class="container mx-auto px-4">
+          <h1 class="text-xl text-center mb-12 italic text-gray-600">
+            Imprimimos el futuro hoy
+          </h1>
+          <div class="max-w-4xl mx-auto">
+            <p class="text-gray-700 mb-6 text-center">
+              En <span class="font-semibold text-green-500">FySistem</span>, somos
+              líderes en soluciones de impresión 3D, brindando servicios
+              innovadores para negocios, academias y hogares en Colombia y América
+              Latina. Nuestro equipo de expertos está dedicado a acompañarte en
+              cada paso del proceso de creación 3D, asegurando que tus visiones
+              cobren vida de manera eficiente y efectiva.
+            </p>
+            <p class="text-gray-700 mb-6 text-center">
+              <span class="font-semibold text-green-500">¿Qué es la impresión 3D?</span><br />
+              Para aquellos que se inician en este fascinante mundo, la impresión
+              3D es una revolucionaria tecnología que permite crear objetos
+              tridimensionales mediante la superposición de capas de material.
+              Este método no solo acelera el proceso de prototipado, sino que
+              también te permite producir objetos personalizados en serie,
+              adaptándose a tus necesidades específicas.
+            </p>
+            <p class="text-gray-700 text-center font-semibold mb-4">
+              <span class="text-green-500">¿Por qué elegirnos?</span>
+            </p>
+            <p class="text-gray-700 text-left font-semibold mb-4">
+              <span class="block mb-2">✅ <span class="font-normal">Calidad Superior:</span> Utilizamos
+                las últimas tecnologías y materiales de alta calidad para
+                garantizar que cada producto final sea excepcional.</span>
+              <span class="block mb-2">✅
+                <span class="font-normal">Diseños Personalizados:</span>
+                Trabajamos contigo para desarrollar diseños únicos que se alineen
+                perfectamente con tu visión y objetivos.</span>
+              <span class="block mb-2">✅
+                <span class="font-normal">Flexibilidad y Rapidez:</span> Nuestra
+                capacidad de producción nos permite ofrecer tiempos de entrega
+                rápidos, sin comprometer la calidad.</span>
+              <span class="block mb-2">✅ <span class="font-normal">Asesoramiento Profesional:</span> Te
+                ofrecemos consultoría en cada etapa, desde la conceptualización
+                hasta la entrega final, asegurando que el resultado supere tus
+                expectativas.</span>
+            </p>
+            <p class="text-gray-700 text-center mb-4">
+              Dale vida a tus proyectos con
+              <span class="font-semibold text-green-500">FYsistem</span>. Ya sea
+              que necesites prototipos para un nuevo producto, piezas
+              personalizadas o soluciones creativas, ¡estamos aquí para ayudarte!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Floating Button -->
+    <div class="fixed bottom-4 right-4">
+      <button
+        class="bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg transition-all duration-300 hover:scale-110">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+      </button>
+    </div>
+  </div>

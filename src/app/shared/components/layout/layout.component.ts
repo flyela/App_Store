@@ -11,12 +11,12 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
     RouterOutlet,
     HeaderComponent,
     FooterComponent,
-    SidebarComponent,
+    
     
   ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.css'
 })
-export default class LayoutComponent {
+export class LayoutComponent {
 
 }

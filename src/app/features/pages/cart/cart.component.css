@@ -1,0 +1,13 @@
+/* cart.component.css */
+.card {
+    @apply p-4 bg-white shadow-lg rounded-lg;
+  }
+  
+  .card img {
+    @apply w-16 h-16 object-cover rounded-md;
+  }
+  
+  .card button {
+    @apply text-red-500 hover:text-red-700;
+  }
+  

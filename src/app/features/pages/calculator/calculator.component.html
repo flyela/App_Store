@@ -1,1 +1,32 @@
-<p>calculator works!</p>
+<div class="bg-white p-6 rounded-lg shadow-md w-80">
+    <!-- Display -->
+    <div class="mb-4 bg-gray-200 text-right text-2xl font-mono p-4 rounded">
+      <span id="display">0</span>
+    </div>
+
+    <!-- Buttons -->
+    <div class="grid grid-cols-4 gap-3">
+      <!-- Row 1 -->
+      <button class="btn" onclick="clearDisplay()">C</button>
+      <button class="btn" onclick="appendOperator('/')">÷</button>
+      <button class="btn" onclick="appendOperator('*')">×</button>
+      <button class="btn bg-blue-500 text-white" onclick="calculate()">=</button>
+
+      <!-- Row 2 -->
+      <button class="btn" onclick="appendNumber('7')">7</button>
+      <button class="btn" onclick="appendNumber('8')">8</button>
+      <button class="btn" onclick="appendNumber('9')">9</button>
+      <button class="btn" onclick="appendOperator('-')">−</button>
+
+      <!-- Row 3 -->
+      <button class="btn" onclick="appendNumber('4')">4</button>
+      <button class="btn" onclick="appendNumber('5')">5</button>
+      <button class="btn" onclick="appendNumber('6')">6</button>
+      <button class="btn" onclick="appendOperator('+')">+</button>
+
+      <!-- Row 4 -->
+      <button class="btn col-span-2" onclick="appendNumber('0')">0</button>
+      <button class="btn" onclick="appendNumber('.')">.</button>
+      <button class="btn bg-red-500 text-white" onclick="deleteLast()">⌫</button>
+    </div>
+  </div>

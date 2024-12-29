@@ -1,1 +1,96 @@
-<p>contact works!</p>
+<section class="bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl font-bold text-center text-gray-900 sm:text-4xl mb-8">Contáctanos</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Información de Contacto -->
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+          <h3 class="text-2xl font-semibold text-gray-800 mb-4">Información</h3>
+                
+          <!-- Preview de los datos ingresados -->
+          <div class="mt-6 p-4 bg-gray-50 rounded-lg" *ngIf="contactForm.dirty">
+            <h4 class="font-semibold text-gray-700 mb-2">Datos ingresados:</h4>
+            <p *ngIf="contactForm.get('name')?.value" class="text-gray-600">Nombre: {{contactForm.get('name')?.value}}</p>
+            <p *ngIf="contactForm.get('email')?.value" class="text-gray-600">Email: {{contactForm.get('email')?.value}}</p>
+            <p *ngIf="contactForm.get('address')?.value" class="text-gray-600">Dirección: {{contactForm.get('address')?.value}}</p>
+            <p *ngIf="contactForm.get('message')?.value" class="text-gray-600">Mensaje: {{contactForm.get('message')?.value}}</p>
+          </div>
+        </div>
+  
+        <!-- Formulario de Contacto -->
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+          <h3 class="text-2xl font-semibold text-gray-800 mb-4">Envíanos un mensaje</h3>
+          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="space-y-4">
+            <div>
+              <label for="name" class="block text-gray-700 font-medium">Nombre</label>
+              <input 
+                type="text" 
+                id="name" 
+                formControlName="name"
+                class="mt-1 block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
+                [ngClass]="{'border-red-500': contactForm.get('name')?.invalid && contactForm.get('name')?.touched}"
+              >
+              <p *ngIf="contactForm.get('name')?.invalid && contactForm.get('name')?.touched" class="text-red-500 text-sm mt-1">
+                Nombre es requerido y debe tener al menos 2 caracteres.
+              </p>
+            </div>
+  
+            <div>
+              <label for="email" class="block text-gray-700 font-medium">Email</label>
+              <input 
+                type="email" 
+                id="email" 
+                formControlName="email"
+                class="mt-1 block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
+                [ngClass]="{'border-red-500': contactForm.get('email')?.invalid && contactForm.get('email')?.touched}"
+              >
+              <p *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched" class="text-red-500 text-sm mt-1">
+                Email es requerido y debe ser válido.
+              </p>
+            </div>
+  
+            <div>
+              <label for="address" class="block text-gray-700 font-medium">Dirección</label>
+              <input 
+                type="text" 
+                id="address" 
+                formControlName="address"
+                class="mt-1 block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
+                [ngClass]="{'border-red-500': contactForm.get('address')?.invalid && contactForm.get('address')?.touched}"
+              >
+              <p *ngIf="contactForm.get('address')?.invalid && contactForm.get('address')?.touched" class="text-red-500 text-sm mt-1">
+                Dirección es requerida.
+              </p>
+            </div>
+  
+            <div>
+              <label for="message" class="block text-gray-700 font-medium">Mensaje</label>
+              <textarea 
+                id="message" 
+                formControlName="message"
+                rows="4" 
+                class="mt-1 block w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
+                [ngClass]="{'border-red-500': contactForm.get('message')?.invalid && contactForm.get('message')?.touched}"
+              ></textarea>
+              <p *ngIf="contactForm.get('message')?.invalid && contactForm.get('message')?.touched" class="text-red-500 text-sm mt-1">
+                Mensaje es requerido y debe tener al menos 10 caracteres.
+              </p>
+            </div>
+  
+            <div>
+              <button 
+                type="submit" 
+                class="w-full bg-indigo-600 text-white p-2 rounded-lg shadow hover:bg-indigo-700 transition-colors duration-300"
+                [disabled]="contactForm.invalid || isLoading"
+              >
+                {{ isLoading ? 'Enviando...' : 'Enviar' }}
+              </button>
+            </div>
+          </form>
+          <div *ngIf="isSubmitted" class="mt-4 p-4 bg-green-100 text-green-700 rounded-lg">
+            Mensaje enviado con éxito. ¡Gracias por contactarnos!
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

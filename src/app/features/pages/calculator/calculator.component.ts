@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './calculator.component.html',
   styleUrl: './calculator.component.css'
 })
-export default class CalculatorComponent {
+export class CalculatorComponent {
 
 }

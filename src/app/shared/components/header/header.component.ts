@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 interface MenuItem {
   path: string;
   title: string;
+  icon?: string;
 }
 
 @Component({
@@ -15,11 +16,23 @@ interface MenuItem {
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  public headerItems: MenuItem[] = [
+  public PagesItems: MenuItem[] = [
     { path: '/home', title: 'Inicio' },
     { path: '/about', title: 'Nosotros' },
     { path: '/contact', title: 'Contacto' },
-    { path: '/calculator', title: 'Calculadora' }
+    { path: '/calculator', title: 'Calculadora' },
+    { path: '/store/products', title: 'Productos' }
+  ];
+
+  public StoreItems: MenuItem[] = [
+    {path: '/store/cart',  title: 'Carrito'},
+
+
+  ];
+
+  public authItems: MenuItem[] = [
+    { path: '/admin/login', title: 'Iniciar Sesión' },
+    { path: '/admin/register', title: 'Registrarse' }
   ];
 
   public isMobileMenuOpen = false;

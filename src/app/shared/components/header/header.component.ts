@@ -17,10 +17,10 @@ interface MenuItem {
 })
 export class HeaderComponent {
   public PagesItems: MenuItem[] = [
-    { path: '/home', title: 'Inicio' },
-    { path: '/about', title: 'Nosotros' },
-    { path: '/contact', title: 'Contacto' },
-    { path: '/calculator', title: 'Calculadora' },
+    { path: '/pages/home', title: 'Inicio' },
+    { path: '/pages/about', title: 'Nosotros' },
+    { path: '/pages/contact', title: 'Contacto' },
+    { path: '/pages/calculator', title: 'Calculadora 3D' },
     { path: '/store/products', title: 'Productos' }
   ];
 
@@ -31,8 +31,8 @@ export class HeaderComponent {
   ];
 
   public authItems: MenuItem[] = [
-    { path: '/admin/login', title: 'Iniciar Sesión' },
-    { path: '/admin/register', title: 'Registrarse' }
+    { path: '/admin/auth/login', title: 'Iniciar Sesión' },
+    { path: '/admin/auth/register', title: 'Registrarse' }
   ];
 
   public isMobileMenuOpen = false;

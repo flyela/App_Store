@@ -1,1 +1,39 @@
-<p>products works!</p>
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6">Nuestros Productos</h1>
+  
+    <!-- Filtros -->
+    <div class="mb-6 flex flex-col sm:flex-row gap-4">
+      <input 
+        type="text" 
+        [(ngModel)]="searchTerm"
+        placeholder="Buscar productos..." 
+        class="p-2 border rounded-md flex-grow"
+      >
+      <select 
+        [(ngModel)]="selectedCategory"
+        class="p-2 border rounded-md"
+      >
+        <option value="all">Todas las categorías</option>
+        <option value="industrial">Industrial</option>
+        <option value="empresarial">Empresarial</option>
+        <option value="academico">Académico</option>
+        <option value="hogares">Hogares</option>
+      </select>
+    </div>
+  
+    <!-- Productos -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div *ngFor="let product of filteredProducts()" 
+           class="border rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 cursor-pointer"
+           [class.ring-2]="selectedProducts.includes(product.id)"
+           [class.ring-blue-500]="selectedProducts.includes(product.id)"
+           (click)="toggleProductSelection(product.id)">
+        <img [src]="product.imageUrl" [alt]="product.name" class="w-full h-48 object-cover">
+        <div class="p-4 bg-white">
+          <h3 class="font-semibold text-lg mb-2">{{ product.name }}</h3>
+          <p class="text-sm text-gray-600">Categoría: {{ product.category }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  

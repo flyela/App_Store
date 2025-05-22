@@ -14,7 +14,7 @@
       <div class="hidden md:flex items-center space-x-6">
         <a *ngFor="let item of PagesItems" 
            [routerLink]="item.path" 
-           routerLinkActive="text-white bg-gray-800"
+           routerLinkActive="text-white bg-gray-900"
            [routerLinkActiveOptions]="{exact: true}"
            class="rounded-md px-3 py-2 text-sm font-medium hover:text-white transition-colors duration-200 no-underline">
           {{item.title}}

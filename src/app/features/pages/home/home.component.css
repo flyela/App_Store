@@ -1,0 +1,12 @@
+/* Estilos adicionales específicos si son necesarios */
+.card-zoom {
+  overflow: hidden;
+}
+
+.card-zoom-image {
+  transition: transform 0.5s ease;
+}
+
+.card-zoom:hover .card-zoom-image {
+  transform: scale(1.05);
+}

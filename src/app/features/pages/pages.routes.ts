@@ -29,6 +29,12 @@ export const PAGES_ROUTES: Routes = [
         title: 'Calculator',
         loadComponent: () => import('./calculator/calculator.component')
           .then(m => m.CalculatorComponent)
+      },
+      {
+        path: 'solutions',
+        title: 'Solutions',
+        loadComponent: () => import('./solutions/solutions.component')
+          .then(m => m.SolutionsComponent)
       }
     ]
   }

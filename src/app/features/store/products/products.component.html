@@ -1,39 +1,193 @@
-<div class="container mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold mb-6">Nuestros Productos</h1>
-  
-    <!-- Filtros -->
-    <div class="mb-6 flex flex-col sm:flex-row gap-4">
-      <input 
-        type="text" 
-        [(ngModel)]="searchTerm"
-        placeholder="Buscar productos..." 
-        class="p-2 border rounded-md flex-grow"
-      >
-      <select 
-        [(ngModel)]="selectedCategory"
-        class="p-2 border rounded-md"
-      >
-        <option value="all">Todas las categorías</option>
-        <option value="industrial">Industrial</option>
-        <option value="empresarial">Empresarial</option>
-        <option value="academico">Académico</option>
-        <option value="hogares">Hogares</option>
-      </select>
+<div class="bg-sky-50 py-16">
+  <div class="container mx-auto px-4">
+    <!-- Header Section -->
+    <div class="text-center mb-16">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+        Nuestros <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600">Productos</span>
+      </h1>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Descubre nuestra amplia gama de productos 3D diseñados para satisfacer las necesidades de diferentes sectores e industrias.
+      </p>
     </div>
-  
-    <!-- Productos -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      <div *ngFor="let product of filteredProducts()" 
-           class="border rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 cursor-pointer"
-           [class.ring-2]="selectedProducts.includes(product.id)"
-           [class.ring-blue-500]="selectedProducts.includes(product.id)"
-           (click)="toggleProductSelection(product.id)">
-        <img [src]="product.imageUrl" [alt]="product.name" class="w-full h-48 object-cover">
-        <div class="p-4 bg-white">
-          <h3 class="font-semibold text-lg mb-2">{{ product.name }}</h3>
-          <p class="text-sm text-gray-600">Categoría: {{ product.category }}</p>
+
+    <!-- Filters Section -->
+    <div class="bg-white rounded-2xl p-6 shadow-lg mb-12">
+      <div class="flex flex-col lg:flex-row gap-6 items-center">
+        <!-- Search Input -->
+        <div class="flex-1 w-full">
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search text-gray-400">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="m21 21-4.35-4.35"/>
+              </svg>
+            </div>
+            <input 
+              type="text" 
+              [(ngModel)]="searchTerm"
+              placeholder="Buscar productos por nombre o descripción..." 
+              class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all"
+            >
+          </div>
+        </div>
+
+        <!-- Category Filter -->
+        <div class="w-full lg:w-auto">
+          <select 
+            [(ngModel)]="selectedCategory"
+            class="w-full lg:w-64 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all bg-white"
+          >
+            <option *ngFor="let category of categories" [value]="category.value">
+              {{ category.label }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Selection Counter -->
+        <div *ngIf="getSelectedCount() > 0" class="flex items-center gap-3">
+          <span class="text-sm text-gray-600">{{ getSelectedCount() }} seleccionado(s)</span>
+          <button 
+            (click)="clearSelection()"
+            class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors text-sm"
+          >
+            Limpiar
+          </button>
         </div>
       </div>
     </div>
+
+    <!-- Featured Products -->
+    <div *ngIf="selectedCategory === 'all'" class="mb-16">
+      <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">
+        Productos <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600">Destacados</span>
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div *ngFor="let product of getFeaturedProducts()" 
+             class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer group relative"
+             [class.ring-4]="selectedProducts.includes(product.id)"
+             [class.ring-pink-500]="selectedProducts.includes(product.id)"
+             (click)="toggleProductSelection(product.id)">
+          
+          <!-- Featured Badge -->
+          <div class="absolute top-4 left-4 z-10 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+            Destacado
+          </div>
+
+          <!-- Selection Indicator -->
+          <div *ngIf="selectedProducts.includes(product.id)" 
+               class="absolute top-4 right-4 z-10 w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check">
+              <path d="m9 12 2 2 4-4"/>
+            </svg>
+          </div>
+
+          <div class="aspect-video overflow-hidden">
+            <img [src]="product.imageUrl" [alt]="product.name" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+          </div>
+          
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-6 h-6 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+              </div>
+              <span class="text-sm text-gray-500 capitalize">{{ getCategoryLabel(product.category) }}</span>
+            </div>
+            <h3 class="font-bold text-xl mb-2 text-gray-800">{{ product.name }}</h3>
+            <p class="text-gray-600 mb-4 text-sm">{{ product.description }}</p>
+            <div class="flex justify-between items-center">
+              <span class="text-lg font-semibold text-pink-600">{{ product.price }}</span>
+              <button class="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-4 py-2 rounded-lg hover:from-pink-600 hover:to-purple-700 transition-all text-sm">
+                Ver detalles
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- All Products Grid -->
+    <div class="mb-12">
+      <div class="flex justify-between items-center mb-8">
+        <h2 class="text-3xl font-bold text-gray-800">
+          <span *ngIf="selectedCategory === 'all'">Todos los Productos</span>
+          <span *ngIf="selectedCategory !== 'all'">{{ getCategoryLabel(selectedCategory) }}</span>
+        </h2>
+        <div class="text-gray-600">
+          {{ filteredProducts().length }} producto(s) encontrado(s)
+        </div>
+      </div>
+
+      <div *ngIf="filteredProducts().length === 0" class="text-center py-12">
+        <div class="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-x text-gray-400">
+            <path d="m13.5 8.5-5 5"/>
+            <path d="m8.5 8.5 5 5"/>
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.35-4.35"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">No se encontraron productos</h3>
+        <p class="text-gray-600">Intenta ajustar tus filtros de búsqueda</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div *ngFor="let product of filteredProducts()" 
+             class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer group relative"
+             [class.ring-4]="selectedProducts.includes(product.id)"
+             [class.ring-pink-500]="selectedProducts.includes(product.id)"
+             (click)="toggleProductSelection(product.id)">
+          
+          <!-- Selection Indicator -->
+          <div *ngIf="selectedProducts.includes(product.id)" 
+               class="absolute top-3 right-3 z-10 w-6 h-6 bg-pink-500 rounded-full flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check">
+              <path d="m9 12 2 2 4-4"/>
+            </svg>
+          </div>
+
+          <div class="aspect-video overflow-hidden">
+            <img [src]="product.imageUrl" [alt]="product.name" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+          </div>
+          
+          <div class="p-4">
+            <div class="flex items-center gap-2 mb-2">
+              <div class="w-5 h-5 bg-gray-500 rounded-full flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tag">
+                  <path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/>
+                  <path d="M7 7h.01"/>
+                </svg>
+              </div>
+              <span class="text-xs text-gray-500 capitalize">{{ getCategoryLabel(product.category) }}</span>
+            </div>
+            <h3 class="font-semibold text-lg mb-2 text-gray-800">{{ product.name }}</h3>
+            <p class="text-gray-600 mb-3 text-sm line-clamp-2">{{ product.description }}</p>
+            <div class="flex justify-between items-center">
+              <span class="text-sm font-semibold text-pink-600">{{ product.price }}</span>
+              <button class="bg-gray-100 hover:bg-pink-500 hover:text-white text-gray-700 px-3 py-1 rounded-md transition-all text-xs">
+                Ver más
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="bg-white rounded-2xl p-8 shadow-xl text-center">
+      <h3 class="text-2xl font-bold text-gray-800 mb-4">¿No encuentras lo que buscas?</h3>
+      <p class="text-gray-600 mb-6 max-w-2xl mx-auto">
+        Ofrecemos servicios de diseño y fabricación personalizados. Contáctanos para crear el producto perfecto para tus necesidades específicas.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <button class="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-3 rounded-lg hover:from-pink-600 hover:to-purple-700 transition-all font-semibold">
+          Solicitar Cotización
+        </button>
+        <button class="border-2 border-pink-500 text-pink-500 px-8 py-3 rounded-lg hover:bg-pink-500 hover:text-white transition-all font-semibold">
+          Ver Catálogo Completo
+        </button>
+      </div>
+    </div>
   </div>
-  
+</div>

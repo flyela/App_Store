@@ -12,11 +12,10 @@ import { CommonModule } from "@angular/common"
 export class HomeComponent {
   // Imágenes para el carrusel
   carouselImages = [
-    "/assets/3d-printer.jpg",
-    "/assets/3d-printer-2.jpg",
-    "/assets/3d-printer-3.jpg",
-    "/assets/3d-printer-4.jpg",
-    "/assets/3d-printer-5.jpg",
+    "https://intelligy.com/files/blog/2022/653/sostenibilidad-impresion3d.jpg",
+    "https://intelligy.com/files/blog/2022/653/sostenibilidad-impresion3d.jpg",
+    "https://http2.mlstatic.com/D_NQ_NP_884468-CBT73228940587_122023-O-broca-de-aguja-para-impresora-3d.webp",
+    "https://i.blogs.es/f30dde/organizador/450_1000.jpg",
   ]
 
   currentImageIndex = 0

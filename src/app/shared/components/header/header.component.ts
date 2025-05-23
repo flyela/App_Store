@@ -20,8 +20,9 @@ export class HeaderComponent {
     { path: '/pages/home', title: 'Inicio' },
     { path: '/pages/about', title: 'Nosotros' },
     { path: '/pages/contact', title: 'Contacto' },
-    { path: '/pages/calculator', title: 'Calculadora 3D' },
-    { path: '/store/products', title: 'Productos' }
+   // { path: '/pages/calculator', title: 'Calculadora 3D' },
+    { path: '/store/products', title: 'Productos' },
+    {path: '/pages/solutions', title: 'Soluciones'},
   ];
 
   public StoreItems: MenuItem[] = [

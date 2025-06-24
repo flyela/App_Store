@@ -15,7 +15,7 @@ export class HomeComponent {
     "https://intelligy.com/files/blog/2022/653/sostenibilidad-impresion3d.jpg",
     "https://intelligy.com/files/blog/2022/653/sostenibilidad-impresion3d.jpg",
     "https://http2.mlstatic.com/D_NQ_NP_884468-CBT73228940587_122023-O-broca-de-aguja-para-impresora-3d.webp",
-    "https://i.blogs.es/f30dde/organizador/450_1000.jpg",
+    "./assets/images/3d-printer-1.jpg",
   ]
 
   currentImageIndex = 0

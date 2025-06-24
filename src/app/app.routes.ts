@@ -7,6 +7,10 @@ export const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
+        path: '',
+        loadChildren: () => import('./features/pages/pages.routes').then(m => m.PAGES_ROUTES),
+      },
+      {
         path: 'pages',
         loadChildren: () => import('./features/pages/pages.routes').then(m => m.PAGES_ROUTES),
       },
